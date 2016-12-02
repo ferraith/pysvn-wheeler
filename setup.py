@@ -10,9 +10,14 @@ import setuptools
 import setuptools.command.build_ext as _build_ext
 
 
-# TODO: Add inline docu
 class InnoSetupExtension(setuptools.Extension):
+    """Extension that consists of an Inno Setup file"""
     def __init__(self, name, sources, version=None, inno_setup=None, *args, **kw):
+        """Initializes a new InnoSetupExtension object.
+
+        :param version: version of setup file
+        :param inno_setup: path to setup file
+        """
         self.version = version
         self.inno_setup = inno_setup
 
@@ -20,26 +25,32 @@ class InnoSetupExtension(setuptools.Extension):
 
 
 class build_ext(_build_ext.build_ext):
-    INNOUNP_EXE = pathlib.Path('tools/innounp.exe')
+    """A specialization of the setuptools command 'build_ext' for processing Inno Setup files.
+
+    :cvar _INNOUNP_EXE: path to innounp tool
+    """
+    _INNOUNP_EXE = pathlib.Path('tools/innounp.exe')
 
     def build_extension(self, ext):
+        """Builds an extension part of the python package."""
         if isinstance(ext, InnoSetupExtension):
             self.extract_inno_setup(ext)
         else:
             super(build_ext, self).build_extension(ext)
 
     def extract_inno_setup(self, ext):
+        """Extracts app folder of Inno Setup file to corresponding package directory."""
         if not ext.inno_setup.is_file():
             raise distutils.errors.DistutilsFileError('Passed setup path isn\'t valid.')
 
-        package_dir = pathlib.Path(self.build_lib, 'pysvn')
+        package_dir = pathlib.Path(self.build_lib, ext.name)
         package_dir.mkdir(parents=True, exist_ok=True)
 
         try:
             # clean up package directory
             shutil.rmtree(str(package_dir))
             # extract setup file to package directory
-            subprocess.run([str(self.INNOUNP_EXE), '-x', '-c{app}', '-d' + str(package_dir),
+            subprocess.run([str(self._INNOUNP_EXE), '-x', '-c{app}', '-d' + str(package_dir),
                             str(ext.inno_setup)], check=True, stdout=subprocess.PIPE,
                            stderr=subprocess.STDOUT, universal_newlines=True)
         except subprocess.CalledProcessError as e:
@@ -47,7 +58,7 @@ class build_ext(_build_ext.build_ext):
                                                       '{}'.format(e.stdout))
 
 if __name__ == '__main__':
-    # search for pysvn setup file
+    # search for setup file in pysvn folder
     pysvn_inno_setup = None
     pysvn_regex = re.compile('py\d{2}-pysvn-svn\d{3,4}-((?:\d+.){2}\d+)-\d{4}.*.exe$')
     for pysvn_exe in pathlib.Path('pysvn').iterdir():
