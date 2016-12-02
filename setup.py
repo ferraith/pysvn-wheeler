@@ -1,13 +1,15 @@
 import distutils.log
 import distutils.version
-import subprocess
+import distutils.errors
 import pathlib
+import subprocess
 
 import setuptools
 import setuptools.command.build_ext as _build_ext
 
 PYSVN_VERSION = '1.9.3'
 PYSVN_INNO_SETUP = 'pysvn/py35-pysvn-svn194-1.9.3-1884-Win64.exe'
+# TODO: Add inline docu
 
 
 class InnoSetupExtension(setuptools.Extension):
@@ -29,17 +31,18 @@ class build_ext(_build_ext.build_ext):
 
     def extract_inno_setup(self, ext):
         if not ext.inno_setup.is_file():
-            distutils.log.fatal('Passed Inno Setup path isn\'t valid.')
+            raise distutils.errors.DistutilsFileError('Passed Inno Setup path isn\'t valid.')
 
         package_dir = pathlib.Path(self.build_lib, 'pysvn')
         package_dir.mkdir(parents=True, exist_ok=True)
 
-        result = subprocess.run([str(self.INNOUNP_EXE), '-x', '-c{app}', '-d' + str(package_dir),
-                                 str(ext.inno_setup)], stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT, universal_newlines=True)
-
-        # TODO: Check return code and print error part of result
-        # TODO: Add inline docu
+        try:
+            subprocess.run([str(self.INNOUNP_EXE), '-x', '-c{app}', '-d' + str(package_dir),
+                            str(ext.inno_setup)], check=True, stdout=subprocess.PIPE,
+                           stderr=subprocess.STDOUT, universal_newlines=True)
+        except subprocess.CalledProcessError as e:
+            raise distutils.errors.DistutilsExecError('Inno Setup file couldn\'t be extracted.\n'
+                                                      '{}'.format(e.stdout))
 
 
 pysvn_inno_setup = InnoSetupExtension(
