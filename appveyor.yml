@@ -3,7 +3,7 @@ platform: x64
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
-  - set PYTHON=C:\Python35-x64
+  - set PYTHON=C:\\Python35-x64
 
 install:
   # download pysvn setup file
@@ -13,7 +13,7 @@ install:
   - set PATH=%PATH%;%PYTHON%
 
   # create up to date virtual env and install packages
-  - %PYTHON%\python.exe -m venv virtual_env
+  - %PYTHON%\python -m venv virtual_env
   - virtual_env\Scripts\activate.bat
   - python -m pip install --upgrade pip
   - pip install --upgrade setuptools wheel
