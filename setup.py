@@ -1,43 +1,52 @@
 import distutils.log
+import distutils.version
 import subprocess
 import pathlib
 
-import setuptools.command.build_ext
-
-# TODO: Extract version out of file or filename
-pysvn_version_info = ('1', '9', '3')
-# TODO: pass file name?
-pysvn_inno_setup = 'py35-pysvn-svn194-1.9.3-1884-Win64.exe'
+import setuptools
+import setuptools.command.build_ext as _build_ext
 
 
-class build_ext(setuptools.command.build_ext.build_ext):
-    INNOUNP_EXE = pathlib.Path('tools', 'innounp.exe')
+class InnoSetupExtension(setuptools.Extension):
+    def __init__(self, name, sources, version=None, inno_setup=None, *args, **kw):
+        self.version = version
+        self.inno_setup = inno_setup
+
+        setuptools.Extension.__init__(self, name, sources, *args, **kw)
+
+
+class build_ext(_build_ext.build_ext):
+    INNOUNP_EXE = pathlib.Path('tools/innounp.exe')
 
     def build_extension(self, ext):
-        if ext.name == pysvn_inno_setup:
+        if isinstance(ext, InnoSetupExtension):
             self.extract_inno_setup(ext)
         else:
             super(build_ext, self).build_extension(ext)
 
     def extract_inno_setup(self, ext):
-        inno_setup_path = pathlib.Path(ext.name)
-        if not inno_setup_path.is_file():
+        if not ext.inno_setup.is_file():
             distutils.log.fatal('Passed Inno Setup path isn\'t valid.')
 
         package_dir = pathlib.Path(self.build_lib, 'pysvn')
         package_dir.mkdir(parents=True, exist_ok=True)
 
         result = subprocess.run([str(self.INNOUNP_EXE), '-x', '-c{app}', '-d' + str(package_dir),
-                                 str(inno_setup_path)], stdout=subprocess.PIPE,
+                                 str(ext.inno_setup)], stdout=subprocess.PIPE,
                                 stderr=subprocess.STDOUT, universal_newlines=True)
 
         # TODO: Check return code and print error part of result
-        # TODO: Maybe add a install hint regarding VS-Redistributable
+        # TODO: Add a install hint regarding VS-Redistributable
+
+
+pysvn_inno_setup = InnoSetupExtension(
+    'pysvn', [], version=distutils.version.StrictVersion('1.9.3'),
+    inno_setup=pathlib.Path('pysvn/py35-pysvn-svn194-1.9.3-1884-Win64.exe'))
 
 
 setuptools.setup(
     name='pysvn',
-    version='{}.{}.{}'.format(*pysvn_version_info),
+    version=str(pysvn_inno_setup.version),
     author="Barry Scott",
     author_email="barryscott@tigris.org",
     description="Subversion support for Python",
@@ -50,10 +59,7 @@ setuptools.setup(
         'build_ext': build_ext,
     },
     ext_modules=[
-        setuptools.Extension(
-            pysvn_inno_setup, [])  # This used to tell setuptools that
-                                   # there is native extension, but
-                                   # they're not build using setuptools.
+        pysvn_inno_setup
     ],
     classifiers=[
         'Topic :: Software Development :: Version Control'
