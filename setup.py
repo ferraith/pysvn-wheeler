@@ -6,6 +6,9 @@ import pathlib
 import setuptools
 import setuptools.command.build_ext as _build_ext
 
+PYSVN_VERSION = '1.9.3'
+PYSVN_INNO_SETUP = 'pysvn/py35-pysvn-svn194-1.9.3-1884-Win64.exe'
+
 
 class InnoSetupExtension(setuptools.Extension):
     def __init__(self, name, sources, version=None, inno_setup=None, *args, **kw):
@@ -36,12 +39,12 @@ class build_ext(_build_ext.build_ext):
                                 stderr=subprocess.STDOUT, universal_newlines=True)
 
         # TODO: Check return code and print error part of result
-        # TODO: Add a install hint regarding VS-Redistributable
+        # TODO: Add inline docu
 
 
 pysvn_inno_setup = InnoSetupExtension(
-    'pysvn', [], version=distutils.version.StrictVersion('1.9.3'),
-    inno_setup=pathlib.Path('pysvn/py35-pysvn-svn194-1.9.3-1884-Win64.exe'))
+    'pysvn', [], version=distutils.version.StrictVersion(PYSVN_VERSION),
+    inno_setup=pathlib.Path(PYSVN_INNO_SETUP))
 
 
 setuptools.setup(
@@ -50,18 +53,24 @@ setuptools.setup(
     author="Barry Scott",
     author_email="barryscott@tigris.org",
     description="Subversion support for Python",
+    long_description="The pysvn module is a python interface to the Subversion version control "
+                     "system. It depends on the native Apache Subversion client which is part of "
+                     "this package. Additionally on Windows platform a VC++ Redistributable "
+                     "suitable for your Python version have to be installed.",
+    platforms=['win32'],
     url="http://pysvn.tigris.org",
     license="Apache Software License",
     keywords="subversion",
     include_package_data=True,
     zip_safe=False,
-    cmdclass={
-        'build_ext': build_ext,
-    },
-    ext_modules=[
-        pysvn_inno_setup
-    ],
+    cmdclass={'build_ext': build_ext},
+    ext_modules=[pysvn_inno_setup],
     classifiers=[
-        'Topic :: Software Development :: Version Control'
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Topic :: Software Development :: Version Control',
+        'Environment :: Win32 (MS Windows)',
+        'Operating System :: Microsoft :: Windows'
     ],
 )
