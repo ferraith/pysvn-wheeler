@@ -61,7 +61,6 @@ setuptools.setup(
     url="http://pysvn.tigris.org",
     license="Apache Software License",
     keywords="subversion",
-    include_package_data=True,
     zip_safe=False,
     cmdclass={'build_ext': build_ext},
     ext_modules=[pysvn_inno_setup],
