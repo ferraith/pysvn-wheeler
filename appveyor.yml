@@ -33,7 +33,10 @@ install:
   - virtual_env\Scripts\activate.bat
   - python -m pip install --upgrade pip
   - pip install --upgrade setuptools wheel
-  - if %PY_VER% < 35 (
+
+  # Compatible pathlib is only shipped with Python 3.5. Older Python versions have to use the
+  # backport pathlib2.
+  - if %PY_VER% LSS 35 (
       pip install pathlib2
     )
   - pip list
