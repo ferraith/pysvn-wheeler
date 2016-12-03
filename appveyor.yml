@@ -1,14 +1,15 @@
 platform: x64
 
 init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
   - set PYTHON=C:\Python35-x64
+  - set PYSVN_SETUP_FILE=py35-pysvn-svn194-1.9.3-1884-Win64.exe
 
 install:
   # download pysvn setup file
   - mkdir pysvn
-  - curl %CURL_ARGS% -o pysvn\py35-pysvn-svn194-1.9.3-1884-Win64.exe http://tigris.org/files/documents/1233/49535/py35-pysvn-svn194-1.9.3-1884-Win64.exe
+  - curl -fsSL -m 300 -o pysvn\%PYSVN_SETUP_FILE% http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
   # Put Python on path
   - set PATH=%PATH%;%PYTHON%
 
@@ -24,4 +25,4 @@ build_script:
   - python setup.py bdist_wheel
 
 on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
