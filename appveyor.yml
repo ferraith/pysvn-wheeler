@@ -1,6 +1,10 @@
 environment:
   matrix:
     - platform: x86
+      PYTHON: C:\Python33
+      PYSVN_SETUP_FILE: py33-pysvn-svn194-1.9.3-1884-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49525/%PYSVN_SETUP_FILE%
+    - platform: x86
       PYTHON: C:\Python34
       PYSVN_SETUP_FILE: py34-pysvn-svn194-1.9.3-1884-Win32.exe
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49529/%PYSVN_SETUP_FILE%
