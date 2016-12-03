@@ -29,12 +29,20 @@ init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
   # Push Python on Path
-  - set Path=C:\Python%PY_VER%;%Path%
+  - set Path=C:\Python%PY_VER%;C:\Python%PY_VER%\Scripts;%Path%
 
 install:
   # Download pysvn setup file
   - mkdir pysvn
   - curl -fsSL -m 300 -o pysvn\%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
+
+  # Create virtual environment
+  - if %PY_VER% GEQ 30 (
+      python -m venv env
+    ) else (
+      virtualenv env
+    )
+  - env\Scripts\activate.bat
 
   # Install packages necessary for build
   - pip install --upgrade setuptools wheel
@@ -43,6 +51,7 @@ install:
   - if %PY_VER% LSS 35 (
       pip install pathlib2
     )
+
   - pip list
 
 build_script:
