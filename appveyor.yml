@@ -28,7 +28,7 @@ install:
   - python -m venv virtual_env
   - virtual_env\Scripts\activate.bat
   - python -m pip install --upgrade pip
-  - pip install --upgrade setuptools wheel
+  - pip install --upgrade setuptools wheel pathlib2
   - pip list
 
 build_script:

@@ -1,13 +1,18 @@
 import distutils.log
 import distutils.version
 import distutils.errors
-import pathlib
+import sys
 import re
 import shutil
 import subprocess
 
 import setuptools
 import setuptools.command.build_ext as _build_ext
+
+if sys.version_info >= (3, 5):
+    import pathlib
+else:
+    import pathlib2 as pathlib
 
 
 class InnoSetupExtension(setuptools.Extension):
