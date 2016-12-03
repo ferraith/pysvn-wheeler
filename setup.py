@@ -9,10 +9,10 @@ import subprocess
 import setuptools
 import setuptools.command.build_ext as _build_ext
 
-if sys.version_info >= (3, 5):
-    import pathlib
-else:
+if sys.version_info < (3, 5):
     import pathlib2 as pathlib
+else:
+    import pathlib
 
 
 class InnoSetupExtension(setuptools.Extension):
