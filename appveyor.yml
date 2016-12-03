@@ -29,7 +29,7 @@ init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
   # Push Python on Path
-  set Path=C:\Python%PY_VER%;%Path%
+  - set Path=C:\Python%PY_VER%;%Path%
 
 install:
   # Download pysvn setup file
