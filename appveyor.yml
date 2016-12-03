@@ -46,7 +46,6 @@ install:
   - if %PY_VER% GEQ 30 (
       python -m venv env
     ) else (
-      pip install virtualenv
       virtualenv env
     )
   - env\Scripts\activate.bat
