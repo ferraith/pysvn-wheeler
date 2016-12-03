@@ -32,14 +32,20 @@ init:
   set Path=C:\Python%PY_VER%;%Path%
 
 install:
-  # download pysvn setup file
+  # Download pysvn setup file
   - mkdir pysvn
   - curl -fsSL -m 300 -o pysvn\%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
 
-  # create up to date virtual env and install packages
+  # Create up to date virtual env and install packages
   - python -m venv virtual_env
   - virtual_env\Scripts\activate.bat
-  - python -m pip install --upgrade pip
+
+  # Install pip which isn't part of Python 3.3.
+  - if %PY_VER% EQU 33 (
+      curl -fsSL -m 300 -o get-pip.py https://bootstrap.pypa.io/get-pip.py
+      python get-pip.py
+    )
+
   - pip install --upgrade setuptools wheel
 
   # Compatible pathlib is only shipped with Python 3.5. Older Python versions have to use the
