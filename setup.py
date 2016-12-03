@@ -55,9 +55,9 @@ class build_ext(_build_ext.build_ext):
             # clean up package directory
             shutil.rmtree(str(package_dir))
             # extract setup file to package directory
-            subprocess.run([str(self._INNOUNP_EXE), '-x', '-c{app}', '-d' + str(package_dir),
-                            str(ext.inno_setup)], check=True, stdout=subprocess.PIPE,
-                           stderr=subprocess.STDOUT, universal_newlines=True)
+            subprocess.check_output([str(self._INNOUNP_EXE), '-x', '-c{app}', '-d' +
+                                     str(package_dir), str(ext.inno_setup)],
+                                    stderr=subprocess.STDOUT, universal_newlines=True)
         except subprocess.CalledProcessError as e:
             raise distutils.errors.DistutilsExecError('Setup file couldn\'t be extracted.\n'
                                                       '{}'.format(e.stdout))
