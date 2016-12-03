@@ -20,7 +20,7 @@ install:
   - set PATH=%PATH%;%PYTHON%
 
   # create up to date virtual env and install packages
-  - '%PYTHON%\python.exe' -m venv virtual_env
+  - '%PYTHON%\python.exe -m venv virtual_env'
   - virtual_env\Scripts\activate.bat
   - python -m pip install --upgrade pip
   - pip install --upgrade setuptools wheel
