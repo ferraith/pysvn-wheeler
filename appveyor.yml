@@ -1,14 +1,15 @@
-matrix:
-  - platform: x86
-    environment:
+environment:
+  matrix:
+    - platform: x86
       PYTHON: C:\Python35
       PYSVN_SETUP_FILE: py35-pysvn-svn194-1.9.3-1884-Win32.exe
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49534/%PYSVN_SETUP_FILE%
-  - platform: x64
-    environment:
+    - platform: x64
       PYTHON: C:\Python35-x64
       PYSVN_SETUP_FILE: py35-pysvn-svn194-1.9.3-1884-Win64.exe
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
+  # Push Python on Path
+  PATH: %PYTHON%;%PATH%
 
 init:
   # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
@@ -17,11 +18,9 @@ install:
   # download pysvn setup file
   - mkdir pysvn
   - curl -fsSL -m 300 -o pysvn\%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
-  # Put Python on path
-  - set PATH=%PATH%;%PYTHON%
 
   # create up to date virtual env and install packages
-  - '%PYTHON%\python.exe -m venv virtual_env'
+  - python -m venv virtual_env
   - virtual_env\Scripts\activate.bat
   - python -m pip install --upgrade pip
   - pip install --upgrade setuptools wheel
