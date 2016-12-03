@@ -36,14 +36,6 @@ install:
   - mkdir pysvn
   - curl -fsSL -m 300 -o pysvn\%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
 
-  # Create virtual environment
-  - if %PY_VER% GEQ 30 (
-      python -m venv env
-    ) else (
-      virtualenv env
-    )
-  - env\Scripts\activate.bat
-
   # Install packages necessary for build
   - pip install --upgrade setuptools wheel
   # Compatible pathlib is only shipped with Python 3.5. Older Python versions have to use the
@@ -51,7 +43,6 @@ install:
   - if %PY_VER% LSS 35 (
       pip install pathlib2
     )
-
   - pip list
 
 build_script:
