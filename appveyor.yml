@@ -9,7 +9,7 @@ environment:
       PYSVN_SETUP_FILE: py35-pysvn-svn194-1.9.3-1884-Win64.exe
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
   # Push Python on Path
-  PATH: %PYTHON%;%PATH%
+  Path: '%PYTHON%;%Path%'
 
 init:
   # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
