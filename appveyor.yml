@@ -49,5 +49,19 @@ build_script:
   # build wheel package
   - python setup.py bdist_wheel
 
+deploy:
+  release: myproduct-v$(appveyor_build_version)
+  description: 'Release description'
+  provider: GitHub
+  auth_token:
+    secure: 13qphbT8UNTvkS6LKClYmu5kJTSLG1c1cNtCDr95nXCElqu/YHw5CfZcSoApgOqR
+  artifact: /.*\.whl/
+  draft: false
+  prerelease: false
+  force_update: true
+  on:
+    branch: master
+    appveyor_repo_tag: true
+
 on_failure:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
