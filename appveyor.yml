@@ -50,7 +50,8 @@ build_script:
   - python setup.py bdist_wheel
 
 artifacts:
-  - path: 'dist\*.whl'
+  - name: pysvn_wheel
+    path: 'dist\*.whl'
 
 deploy:
   release: pysvn
@@ -58,6 +59,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: 13qphbT8UNTvkS6LKClYmu5kJTSLG1c1cNtCDr95nXCElqu/YHw5CfZcSoApgOqR
+  artifact: pysvn_wheel
   draft: false
   prerelease: false
   force_update: true
