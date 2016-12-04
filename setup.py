@@ -3,13 +3,12 @@ import distutils.version
 import distutils.errors
 import sys
 import re
-import shutil
 import subprocess
 
 import setuptools
 import setuptools.command.build_ext as _build_ext
 
-if sys.version_info < (3, 5):
+if sys.version_info < (3, 4):
     import pathlib2 as pathlib
 else:
     import pathlib
@@ -49,13 +48,10 @@ class build_ext(_build_ext.build_ext):
             raise distutils.errors.DistutilsFileError('Passed setup path isn\'t valid.')
 
         package_dir = pathlib.Path(self.build_lib, ext.name)
-        package_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            # clean up package directory
-            shutil.rmtree(str(package_dir))
             # extract setup file to package directory
-            subprocess.check_output([str(self._INNOUNP_EXE), '-x', '-c{app}', '-d' +
+            subprocess.check_output([str(self._INNOUNP_EXE), '-x', '-y', '-c{app}', '-d' +
                                      str(package_dir), str(ext.inno_setup)],
                                     stderr=subprocess.STDOUT, universal_newlines=True)
         except subprocess.CalledProcessError as e:

@@ -26,25 +26,19 @@ environment:
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
 
 init:
-  # Push Python on Path
   - set Path=C:\Python%PY_VER%;C:\Python%PY_VER%\Scripts;%Path%
 
 install:
-  # Download pysvn setup file
-  - mkdir pysvn
-  - curl -fsSL -m 300 -o pysvn\%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
+  - curl -fsSL -m 300 --create-dirs -o pysvn\%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
 
-  # Install packages necessary for build
   - pip install --upgrade setuptools wheel
-  # Compatible pathlib is only shipped with Python 3.5. Older Python versions have to use the
-  # backport pathlib2.
-  - if %PY_VER% LSS 35 (
+  # pathlib was introduced with Python 3.4. Older Python versions have to use the backport pathlib2.
+  - if %PY_VER% LSS 34 (
       pip install pathlib2
     )
   - pip list
 
 build_script:
-  # build wheel package
   - python setup.py bdist_wheel
 
 artifacts:
