@@ -58,7 +58,6 @@ deploy:
   provider: GitHub
   auth_token:
     secure: 13qphbT8UNTvkS6LKClYmu5kJTSLG1c1cNtCDr95nXCElqu/YHw5CfZcSoApgOqR
-  artifact: /dist\\.*\.whl/
   draft: false
   prerelease: false
   force_update: true
