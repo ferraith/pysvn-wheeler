@@ -49,6 +49,9 @@ build_script:
   # build wheel package
   - python setup.py bdist_wheel
 
+artifacts:
+  - path: 'dist\*.whl'
+
 deploy:
   release: pysvn-v$(appveyor_build_version)
   description: 'Release description'
