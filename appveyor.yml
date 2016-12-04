@@ -48,16 +48,16 @@ build_script:
   - python setup.py bdist_wheel
 
 artifacts:
-  - name: pysvn_wheel
+  - name: wheel
     path: 'dist\*.whl'
 
 deploy:
   release: pysvn-v$(appveyor_repo_tag_name)
-  description: 'pysvn $(appveyor_repo_tag_name) wheels'
+  description: 'Wheels for pysvn $(appveyor_repo_tag_name) release'
   provider: GitHub
   auth_token:
     secure: 13qphbT8UNTvkS6LKClYmu5kJTSLG1c1cNtCDr95nXCElqu/YHw5CfZcSoApgOqR
-  artifact: pysvn_wheel
+  artifact: wheel
   force_update: true
   on:
     branch: master
