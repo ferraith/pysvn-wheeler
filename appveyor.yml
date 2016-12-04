@@ -26,8 +26,6 @@ environment:
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
 
 init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
   # Push Python on Path
   - set Path=C:\Python%PY_VER%;C:\Python%PY_VER%\Scripts;%Path%
 
@@ -66,6 +64,3 @@ deploy:
   on:
     branch: master
     appveyor_repo_tag: false
-
-on_failure:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
