@@ -25,8 +25,7 @@ environment:
       PYSVN_SETUP_FILE: py35-pysvn-svn194-1.9.3-1884-Win64.exe
       PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
 
-init:
-  - set Path=C:\Python%PY_VER%;C:\Python%PY_VER%\Scripts;%Path%
+  PATH: C:\Python%PY_VER%;C:\Python%PY_VER%\Scripts;%PATH%
 
 install:
   - curl -fsSL -m 300 --create-dirs -o pysvn/%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
