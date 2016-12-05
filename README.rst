@@ -14,6 +14,9 @@ Installation
 
 ``pysvn-wheeler`` can be used to install ``pysvn`` with pip using an on-demand created wheel package. Additionally wheel packages for all common Python versions are provided at the `release <https://github.com/ferraith/pysvn-wheeler/releases>`__ page.
 
+On Windows platform ``pysvn`` requires the installation of VC++ Redistributable. The version of the VC++ Redistributable package depends on the used Python version (see `Python Wiki <https://wiki.python.org/moin/WindowsCompilers>`__).
+
+
 From Source Code
 ****************
 
