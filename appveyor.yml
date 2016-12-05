@@ -45,7 +45,7 @@ artifacts:
     path: 'dist\*.whl'
 
 deploy:
-  release: pysvn-v$(appveyor_repo_tag_name)
+  release: v$(appveyor_repo_tag_name)
   description: 'Wheels for pysvn $(appveyor_repo_tag_name) release'
   provider: GitHub
   auth_token:
