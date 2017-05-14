@@ -2,8 +2,8 @@ environment:
   matrix:
     - platform: x86
       PY_VER: 27
-      PYSVN_SETUP_FILE: py27-pysvn-svn1816-1.9.3-1884-Win32.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49516/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py27-pysvn-svn194-1.9.3-1884-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49518/%PYSVN_SETUP_FILE%
     - platform: x64
       PY_VER: 27-x64
       PYSVN_SETUP_FILE: py27-pysvn-svn194-1.9.3-1884-Win64.exe
