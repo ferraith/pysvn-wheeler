@@ -9,5 +9,8 @@ dist/
 *.egg-info/
 pysvn/
 
+# virtual environment
+venv/
+
 # Jetbrains IDE project files
 .idea/
