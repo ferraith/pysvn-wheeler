@@ -58,6 +58,7 @@ class build_ext(_build_ext.build_ext):
             raise distutils.errors.DistutilsExecError('Setup file couldn\'t be extracted.\n'
                                                       '{}'.format(e.stdout))
 
+
 if __name__ == '__main__':
     # search for setup file in pysvn folder
     pysvn_inno_setup = None

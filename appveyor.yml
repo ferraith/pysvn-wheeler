@@ -2,28 +2,36 @@ environment:
   matrix:
     - platform: x86
       PY_VER: 27
-      PYSVN_SETUP_FILE: py27-pysvn-svn194-1.9.3-1884-Win32.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49518/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py27-pysvn-svn1100-1.9.6-1961-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49578/%PYSVN_SETUP_FILE%
     - platform: x64
       PY_VER: 27-x64
-      PYSVN_SETUP_FILE: py27-pysvn-svn194-1.9.3-1884-Win64.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49519/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py27-pysvn-svn1100-1.9.6-1961-Win64.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49579/%PYSVN_SETUP_FILE%
     - platform: x86
       PY_VER: 33
-      PYSVN_SETUP_FILE: py33-pysvn-svn194-1.9.3-1884-Win32.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49525/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py33-pysvn-svn1100-1.9.6-1961-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49590/%PYSVN_SETUP_FILE%
     - platform: x86
       PY_VER: 34
-      PYSVN_SETUP_FILE: py34-pysvn-svn194-1.9.3-1884-Win32.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49529/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py34-pysvn-svn1100-1.9.6-1961-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49593/%PYSVN_SETUP_FILE%
     - platform: x86
       PY_VER: 35
-      PYSVN_SETUP_FILE: py35-pysvn-svn194-1.9.3-1884-Win32.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49534/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py35-pysvn-svn1100-1.9.6-1961-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49599/%PYSVN_SETUP_FILE%
     - platform: x64
       PY_VER: 35-x64
-      PYSVN_SETUP_FILE: py35-pysvn-svn194-1.9.3-1884-Win64.exe
-      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49535/%PYSVN_SETUP_FILE%
+      PYSVN_SETUP_FILE: py35-pysvn-svn1100-1.9.6-1961-Win64.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49600/%PYSVN_SETUP_FILE%
+    - platform: x86
+      PY_VER: 36
+      PYSVN_SETUP_FILE: py36-pysvn-svn1100-1.9.6-1961-Win32.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49608/%PYSVN_SETUP_FILE%
+    - platform: x64
+      PY_VER: 36-x64
+      PYSVN_SETUP_FILE: py36-pysvn-svn1100-1.9.6-1961-Win64.exe
+      PYSVN_DL_LINK: http://tigris.org/files/documents/1233/49609/%PYSVN_SETUP_FILE%
 
   PATH: C:\Python%PY_VER%;C:\Python%PY_VER%\Scripts;%PATH%
 
