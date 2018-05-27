@@ -12,5 +12,6 @@ pysvn/
 # virtual environment
 venv/
 
-# Jetbrains IDE project files
+# editor files
 .idea/
+.vscode/
