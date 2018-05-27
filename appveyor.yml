@@ -38,7 +38,8 @@ environment:
 install:
   - curl -fsSL -m 300 --create-dirs -o pysvn/%PYSVN_SETUP_FILE% %PYSVN_DL_LINK%
 
-  - pip install --upgrade setuptools wheel
+  - python -m pip install -U pip setuptools
+  - pip install -r requirements.txt
   # pathlib was introduced with Python 3.4. Older Python versions have to use the backport pathlib2.
   - if %PY_VER% LSS 34 (
       pip install pathlib2
