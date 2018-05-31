@@ -29,7 +29,8 @@ class InnoSetupExtension(setuptools.Extension):
 
 
 class build_ext(_build_ext.build_ext):
-    """A specialization of the setuptools command 'build_ext' for processing Inno Setup files.
+    """A specialization of the setuptools command 'build_ext' for processing
+    Inno Setup files.
 
     :cvar _INNOUNP_EXE: path to innounp tool
     """
