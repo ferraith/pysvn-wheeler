@@ -1,7 +1,22 @@
 pysvn-wheeler
 =============
 
-|Build Status| |Latest Release|
+|Build Status| |GitHub Version| |License|
+
+.. |Build Status| image:: https://ci.appveyor.com/api/projects/status/github/ferraith/pysvn-wheeler?branch=master&svg=true
+   :target: https://ci.appveyor.com/project/ferraith/pysvn-wheeler/branch/master
+   :alt: Build Status
+
+.. |GitHub Version| image:: https://badge.fury.io/gh/ferraith%2Fpysvn-wheeler.svg
+   :target: https://github.com/ferraith/pysvn-wheeler/releases
+   :alt: GitHub Version
+
+.. |License| image:: https://img.shields.io/github/license/ferraith/pysvn-wheeler.svg
+    :target: https://raw.githubusercontent.com/ferraith/pysvn-wheeler/master/LICENSE
+    :alt: License
+
+Overview
+--------
 
 Wheel packages for `pysvn <http://pysvn.tigris.org/>`__.
 
@@ -34,11 +49,3 @@ From GitHub Releases
 ::
 
     > pip install <pysvn_wheel>
-
-.. |Build Status| image:: https://ci.appveyor.com/api/projects/status/github/ferraith/pysvn-wheeler?branch=master&svg=true
-   :target: https://ci.appveyor.com/project/ferraith/pysvn-wheeler/branch/master
-   :alt: Build Status
-
-.. |Latest Release| image:: https://img.shields.io/github/release/ferraith/pysvn-wheeler.svg
-   :target: https://github.com/ferraith/pysvn-wheeler/releases
-   :alt: Latest Release
